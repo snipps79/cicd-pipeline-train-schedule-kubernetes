@@ -8,20 +8,20 @@ spec:
     app: train-schedule
   ports:
   - protocol: TCP
-    ports: 8080
+    port: 8080
     nodePort: 8080
-    
+
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: train-schedule-deployment
   labels:
     app: train-schedule
 spec:
   replicas: 2
-  selector: 
+  selector:
     matchLabels:
       app: train-schedule
   template:
@@ -33,5 +33,4 @@ spec:
       - name: train-schedule
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
-          - containerPort: 8080
-    
+        - containerPort: 8080
